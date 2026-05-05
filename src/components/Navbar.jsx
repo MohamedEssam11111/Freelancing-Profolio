@@ -27,7 +27,7 @@ const Navbar = () => {
         className="pointer-events-auto transition-transform duration-300 hover:scale-110 active:scale-95 group"
       >
         <img
-          src="/assets/me.png"
+          src="../../public/assets/me.png"
           alt="Logo"
           className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover border-2 border-dark-primary/20 shadow-[0_0_15px_rgba(255,255,255,0.1)] group-hover:shadow-dark-primary/30 transition-all"
         />

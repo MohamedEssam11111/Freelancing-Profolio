@@ -25,11 +25,11 @@ const skillsData = [
   },
 ];
 
-const SkillsSection = () => {
+const SkillsSection = ({ isDark }) => {
   return (
     <section
       id="skills"
-      className="relative w-full py-24 md:py-32 overflow-hidden"
+      className={`relative w-full py-24 md:py-32 overflow-hidden ${isDark ? "bg-[#0B0B0F]" : "bg-[#F8F9FC]"}`}
     >
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         {/* Section Header */}
@@ -51,7 +51,7 @@ const SkillsSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-bold tracking-tighter"
+            className={`text-4xl md:text-5xl font-bold tracking-tighter ${isDark ? "text-white" : "text-black"}`}
           >
             Skills & <span className="text-dark-primary">Capabilities.</span>
           </motion.h2>
@@ -67,7 +67,7 @@ const SkillsSection = () => {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
               whileHover={{ scale: 1.02, y: -5 }}
-              className="group relative p-8 rounded-3xl bg-white/[0.03] border border-white/5 hover:border-dark-primary/30 transition-all duration-500"
+              className={`group relative p-8 rounded-3xl  border border-white/5 hover:border-dark-primary/30 transition-all duration-500 ${isDark ? "bg-white/[0.03]" : "bg-black/[0.03]"}`}
             >
               {/* Card Glow Effect */}
               <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none shadow-[0_0_40px_rgba(212,255,0,0.05)]" />
@@ -76,7 +76,9 @@ const SkillsSection = () => {
                 {group.icon}
               </div>
 
-              <h3 className="text-xl font-bold mb-6 tracking-tight text-white/90">
+              <h3
+                className={`text-xl font-bold mb-6 tracking-tight ${isDark ? "text-white/90" : "text-black/90"}`}
+              >
                 {group.category}
               </h3>
 
