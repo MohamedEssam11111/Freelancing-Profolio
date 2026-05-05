@@ -2,21 +2,24 @@ import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "motion/react";
-
+import EmadImg from "../../public/assets/emad.png";
+import RamadanImg from "../../public/assets/ramadan.png";
+import EmadPortfolio from "../../public/assets/emad portfolio.png";
+import RamadanPortfolio from "../../public/assets/ramadan portfolio.png";
 gsap.registerPlugin(ScrollTrigger);
 
 const testimonials = [
   {
     name: "Emad Abdalla",
-    image: "../../public/assets/emad.png",
-    portfolioPreview: "../../public/assets/emad portfolio.png",
+    image: EmadImg,
+    portfolioPreview: EmadPortfolio,
     feedback:
       "“Thank you, Mohamed, for building my portfolio. You captured my work beautifully and made it simple for patients to connect with me. I truly appreciate your professionalism, and I highly recommend you to anyone looking for a reliable developer.”",
   },
   {
     name: "Mohamed Ramadan",
-    image: "../../public/assets/ramadan.png",
-    portfolioPreview: "../../public/assets/ramadan portfolio.png",
+    image: RamadanImg,
+    portfolioPreview: RamadanPortfolio,
     feedback:
       "“شكراً ليك يا محمد على بناء البورتفوليو بتاعي. قدرت تعرض مشاريعي ومهاراتي في النيتوركنج بشكل واضح وبطريقة طبيعية تعكس شخصيتي. التجربة معاك كانت ممتازة، وأنصح أي حد محتاج يظهر شغله إنه يتعاون معاك لأنك مطوّر ويب محترف.”",
   },

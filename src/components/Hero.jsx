@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
+import WhiteImg from "../../public/assets/white img.png";
+import BlackImg from "../../public/assets/black img.png";
 gsap.registerPlugin(ScrollTrigger);
 
 const Hero = ({ isDark }) => {
@@ -158,7 +159,7 @@ const Hero = ({ isDark }) => {
             }`}
           >
             <img
-              src="../../public/assets/black img.png"
+              src={BlackImg}
               className="w-full h-full object-cover"
               alt="Profile Dark"
               referrerPolicy="no-referrer"
@@ -172,7 +173,7 @@ const Hero = ({ isDark }) => {
             }`}
           >
             <img
-              src="../../public/assets/white img.png"
+              src={WhiteImg}
               className="w-full h-full object-cover"
               alt="Profile Light"
               referrerPolicy="no-referrer"
