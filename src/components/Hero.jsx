@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import WhiteImg from "../../public/assets/white img.png";
-import BlackImg from "../../public/assets/black img.png";
+import WhiteImg from "/white img.png";
+import BlackImg from "/black img.png";
 gsap.registerPlugin(ScrollTrigger);
 
 const Hero = ({ isDark }) => {
@@ -134,13 +134,19 @@ const Hero = ({ isDark }) => {
         </div>
 
         <div className="flex items-center gap-8">
-          <button className="px-8 py-4 bg-gradient-to-r from-dark-primary to-dark-secondary light:from-light-primary light:to-light-secondary text-black light:text-white font-bold uppercase tracking-widest text-[10px] rounded-sm hover:opacity-90 transition-opacity shadow-[0_10px_30px_rgba(192,132,252,0.3)]">
+          <a
+            className="px-8 py-4 bg-gradient-to-r from-dark-primary to-dark-secondary light:from-light-primary light:to-light-secondary text-black light:text-white font-bold uppercase tracking-widest text-[10px] rounded-sm hover:opacity-90 transition-opacity shadow-[0_10px_30px_rgba(192,132,252,0.3)]"
+            href="#contact"
+          >
             Start Your Project
-          </button>
-          <button className="flex items-center gap-3 group text-[10px] font-bold uppercase tracking-widest text-dark-text-secondary light:text-light-text-secondary">
+          </a>
+          <a
+            className="flex items-center gap-3 group text-[10px] font-bold uppercase tracking-widest text-dark-text-secondary light:text-light-text-secondary"
+            href="#contact"
+          >
             <span className="w-8 h-[1px] bg-dark-text-secondary light:bg-light-text-secondary group-hover:w-12 transition-all"></span>
             View Portfolio
-          </button>
+          </a>
         </div>
       </div>
 

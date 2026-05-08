@@ -1,35 +1,28 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { client, urlFor } from "../sanityClient";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import portfolioImg from "../../public/assets/portfolio1.png";
-import coffeeImg from "../../public/assets/coffee1.png";
-import yumifyImg from "../../public/assets/yumify1.png";
+import portfolioImg from "/portfolio1.png";
+import coffeeImg from "/coffee1.png";
+import yumifyImg from "/yumify1.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const services = [
-  {
-    title: "Portfolio & Personal Sites",
-    description:
-      "Modern portfolios that showcase your work and help you stand out.",
-    image: portfolioImg,
-  },
-  {
-    title: "Landing Pages That Convert",
-    description:
-      "Focused landing pages built to drive action and maximize results.",
-    image: coffeeImg,
-  },
-  {
-    title: "Conversion-Focused Websites",
-    description:
-      "Websites designed to guide users, increase engagement, and turn visitors into clients.",
-    image: yumifyImg,
-  },
-];
-
 const ServicesSection = ({ isDark }) => {
+  const [services, setServices] = useState([]);
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const data = await client.fetch(`*[_type == "service"]`);
+        setServices(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchServices();
+  }, []);
   const containerRef = useRef(null);
   const trackRef = useRef(null);
 
@@ -102,7 +95,7 @@ const ServicesSection = ({ isDark }) => {
     }, containerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [services]);
 
   return (
     <section
@@ -129,7 +122,7 @@ const ServicesSection = ({ isDark }) => {
             {/* Background Image Layer */}
             <div
               className="card-bg absolute inset-0 -left-[10%] w-[120%] h-full bg-cover bg-center will-change-transform"
-              style={{ backgroundImage: `url(${service.image})` }}
+              style={{ backgroundImage: `url(${urlFor(service.image).url()})` }}
             />
 
             {/* Direct Overlay for each slide */}

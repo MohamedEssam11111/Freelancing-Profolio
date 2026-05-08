@@ -1,31 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
+import { client, urlFor } from "../sanityClient";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "motion/react";
-import EmadImg from "../../public/assets/emad.png";
-import RamadanImg from "../../public/assets/ramadan.png";
-import EmadPortfolio from "../../public/assets/emad portfolio.png";
-import RamadanPortfolio from "../../public/assets/ramadan portfolio.png";
+import EmadImg from "/emad.png";
+import RamadanImg from "/ramadan.png";
+import EmadPortfolio from "/emad portfolio.png";
+import RamadanPortfolio from "/ramadan portfolio.png";
 gsap.registerPlugin(ScrollTrigger);
 
-const testimonials = [
-  {
-    name: "Emad Abdalla",
-    image: EmadImg,
-    portfolioPreview: EmadPortfolio,
-    feedback:
-      "“Thank you, Mohamed, for building my portfolio. You captured my work beautifully and made it simple for patients to connect with me. I truly appreciate your professionalism, and I highly recommend you to anyone looking for a reliable developer.”",
-  },
-  {
-    name: "Mohamed Ramadan",
-    image: RamadanImg,
-    portfolioPreview: RamadanPortfolio,
-    feedback:
-      "“شكراً ليك يا محمد على بناء البورتفوليو بتاعي. قدرت تعرض مشاريعي ومهاراتي في النيتوركنج بشكل واضح وبطريقة طبيعية تعكس شخصيتي. التجربة معاك كانت ممتازة، وأنصح أي حد محتاج يظهر شغله إنه يتعاون معاك لأنك مطوّر ويب محترف.”",
-  },
-];
-
 const TestimonialsSection = ({ isDark }) => {
+  const [testimonials, setTestimonials] = useState([]);
+
+  useEffect(() => {
+    client
+      .fetch(`*[_type == "testimonial"]`)
+      .then((data) => setTestimonials(data))
+      .catch(console.error);
+  }, []);
   const containerRef = useRef(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -139,7 +131,7 @@ const TestimonialsSection = ({ isDark }) => {
               <div className="flex items-center gap-5">
                 <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-dark-primary/30 p-1 bg-dark-primary/5">
                   <img
-                    src={t.image}
+                    src={urlFor(t.image).url()}
                     alt={t.name}
                     className="w-full h-full object-cover rounded-full"
                     width="64"
@@ -165,7 +157,7 @@ const TestimonialsSection = ({ isDark }) => {
               <div className="mt-8 md:hidden">
                 <div className="rounded-xl overflow-hidden border border-white/10 shadow-lg aspect-[16/10]">
                   <img
-                    src={t.portfolioPreview}
+                    src={urlFor(t.portfolioPreview).url()}
                     alt={`${t.name} Portfolio`}
                     className="w-full h-full object-cover"
                   />
@@ -208,7 +200,7 @@ const TestimonialsSection = ({ isDark }) => {
             className="hidden md:block w-80 aspect-[16/10] rounded-2xl overflow-hidden shadow-[0_30px_60px_-12px_rgba(0,0,0,0.5)] border border-white/20 bg-black/20 backdrop-blur-sm"
           >
             <img
-              src={testimonials[hoveredIndex].portfolioPreview}
+              src={urlFor(testimonials[hoveredIndex].portfolioPreview).url()}
               alt="Project Preview"
               className="w-full h-full object-cover"
             />

@@ -1,61 +1,27 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { client, urlFor } from "../sanityClient";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import portfolioImg from "../../public/assets/portfolio.png";
-import yumifyImg from "../../public/assets/yumify.png";
-import coffeeImg from "../../public/assets/coffee.png";
+import portfolioImg from "/portfolio.png";
+import yumifyImg from "/yumify.png";
+import coffeeImg from "/coffee.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const projects = [
-  {
-    title: "Professional Portfolio Website",
-    hook: "Showcasing frontend work with clarity and strong visual presentation",
-    description:
-      "A professional portfolio site built to present projects, skills, and experience in a clean and structured way. Designed with responsive layouts, intuitive navigation, and polished UI interactions.",
-    approach:
-      "Focused on clean layout, smooth interactions, and clear content hierarchy",
-    result:
-      "Improved presentation of work and better user navigation experience",
-    cta: "View Project",
-    link: "https://mohamedessam11111.github.io/simple-portfolio/",
-    image: portfolioImg,
-    id: "01",
-  },
-  {
-    title: "Restaurant Order Tracking & Management Web App",
-    hook: "Building a dynamic system for managing restaurant orders efficiently",
-    description:
-      "A restaurant order tracking and management web application built with React and Tailwind CSS. Developed as part of a team, focusing on responsive UI and real-time data handling.",
-    approach:
-      "Built reusable components, integrated REST APIs, and collaborated using GitHub",
-    result:
-      "Delivered a responsive and scalable interface with improved user interaction",
-    cta: "View Project",
-    link: "https://yumify-plus.vercel.app/",
-    image: yumifyImg,
-    id: "02",
-  },
-  {
-    title: "Coffee Brand Marketing Website",
-    hook: "Creating a visually engaging experience for a modern coffee brand",
-    description:
-      "A responsive marketing website built using HTML, CSS, and JavaScript. Designed to deliver a clean, engaging user experience with strong visual hierarchy and branding.",
-    approach:
-      "Focused on typography, layout balance, and interactive UI elements",
-    result:
-      "Delivered a smooth and engaging browsing experience across all devices",
-    cta: "View Project",
-    link: "https://mohamedessam11111.github.io/Coffee-website/",
-    image: coffeeImg,
-    id: "03",
-  },
-];
-
 const CaseStudies = ({ isDark }) => {
-  const sectionRef = useRef(null);
+  const [projects, setProjects] = useState([]);
 
+  useEffect(() => {
+    client
+      .fetch(`*[_type == "project"]`)
+      .then((data) => {
+        console.log(data);
+        setProjects(data);
+      })
+      .catch(console.error);
+  }, []);
+  const sectionRef = useRef(null);
   useEffect(() => {
     const ctx = gsap.context(() => {
       projects.forEach((_, index) => {
@@ -146,7 +112,7 @@ const CaseStudies = ({ isDark }) => {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [isDark]);
+  }, [projects, isDark]);
 
   return (
     <section
@@ -185,7 +151,7 @@ const CaseStudies = ({ isDark }) => {
               >
                 <div className="absolute inset-0 bg-black/10 z-[1]" />
                 <img
-                  src={project.image}
+                  src={urlFor(project.image).url()}
                   alt={project.title}
                   className="project-image w-full h-full object-cover will-change-transform"
                 />
@@ -198,7 +164,7 @@ const CaseStudies = ({ isDark }) => {
             >
               <div className="flex items-center gap-4">
                 <span className="text-dark-primary font-mono text-xl font-bold">
-                  {project.id}
+                  {idx + 1}
                 </span>
                 <div className="h-[1px] w-12 bg-dark-primary" />
               </div>

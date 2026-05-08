@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../public/assets/me.png";
+import logo from "/me.png";
 const Navbar = () => {
   const scrollToSection = (e, id) => {
     e.preventDefault();
